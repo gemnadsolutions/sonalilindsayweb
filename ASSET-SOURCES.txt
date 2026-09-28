@@ -1,0 +1,65 @@
+ASSET SOURCES
+=============
+
+Brand logo, hero portrait, About portrait and five MP3 previews: supplied by the user in the referenced ChatGPT conversation.
+Logo is cropped to its existing transparent bounds; portraits compressed to WebP.
+About image: user-supplied cc.jpg. Band image: user-supplied CC2.png. Both optimized to WebP from 4032 × 1024 originals.
+Temporary audio artwork reuses the supplied portraits/concert photo.
+
+Archive source: https://sonalilindsay.com/latest-archives/
+Downloaded 28 September 2026, resized and converted to WebP.
+
+assets/archive-1.webp
+https://sonalilindsay.com/wp-content/uploads/2025/04/0B3A5850-1024x683.jpg
+
+assets/archive-2.webp
+https://sonalilindsay.com/wp-content/uploads/2025/04/0B3A5722-1024x683.jpg
+
+assets/archive-3.webp
+https://sonalilindsay.com/wp-content/uploads/2025/04/IMG_4375-1024x768.jpg
+
+assets/archive-4.webp
+https://sonalilindsay.com/wp-content/uploads/2025/04/20160208_011310093_iOS-1024x703.jpg
+
+assets/archive-5.webp
+https://sonalilindsay.com/wp-content/uploads/2025/04/Sonali-2001-1-737x1024.jpg
+
+assets/archive-6.webp
+https://sonalilindsay.com/wp-content/uploads/2025/04/IMG_4379-1024x768.jpg
+
+assets/archive-7.webp
+https://sonalilindsay.com/wp-content/uploads/2025/04/DSC_0017-1-680x1024.jpg
+
+assets/archive-8.webp
+https://sonalilindsay.com/wp-content/uploads/2025/04/IMG_4387-1024x748.jpg
+
+assets/release-1.jpg
+https://i.ytimg.com/vi/5Y7Lm3UY_mM/hqdefault.jpg
+Saregama - Sonali Lindsay (Official Music Video)
+
+assets/release-2.jpg
+https://i.ytimg.com/vi/xb1OAIFNmLM/hqdefault.jpg
+Showers Of Light - Sonali Lindsay  (Official Music Video)
+
+assets/release-3.jpg
+https://i.ytimg.com/vi/QHXGc06jeYA/hqdefault.jpg
+Oba Mata Dun Adare | Sonali Lindsay | LYRICS AUDIO
+
+assets/release-4.jpg
+https://i.ytimg.com/vi/G6A6Te3awqc/hqdefault.jpg
+Amma (අම්මා) | Sonali Lindsay | Official Music Video | Mother's Day Song
+
+assets/video-poster.jpg
+https://i.ytimg.com/vi/Cf3tMUxd68Q/hqdefault.jpg
+
+assets/video-1.jpg
+https://i.ytimg.com/vi/Cf3tMUxd68Q/hqdefault.jpg
+
+assets/video-2.jpg
+https://i.ytimg.com/vi/R7IOmjmQs5w/hqdefault.jpg
+
+assets/video-3.jpg
+https://i.ytimg.com/vi/SMR6ZRfl8DI/hqdefault.jpg
+
+assets/video-4.jpg
+https://i.ytimg.com/vi/jPkbj67eSZM/hqdefault.jpg
