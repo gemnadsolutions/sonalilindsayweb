@@ -24,7 +24,7 @@ html,body{overflow-x:clip}
 .spotify-intro h2{margin:0 0 12px;font:500 42px/1.1 var(--serif);color:var(--cream)}
 .spotify-intro h2 span{color:var(--green)}
 .spotify-intro p:not(.kicker){font-size:14px;line-height:1.65;color:#b9cbc6;margin:0 0 20px}
-.spotify-intro a{font-size:12px;border-bottom:1px solid #7ca99a;padding-bottom:5px}
+.spotify-intro a{display:inline-flex;align-items:center;gap:7px;font-size:12px;border-bottom:1px solid #7ca99a;padding-bottom:5px}
 .spotify-body{min-width:0}
 .social-grid{gap:13px}
 .social-grid a{width:44px;height:44px;display:grid;place-items:center;padding:0;border:1px solid #e8bd8255;border-radius:50%;color:var(--cream);transition:background .2s,color .2s}
@@ -52,7 +52,7 @@ html,body{overflow-x:clip}
 .apple-shade{position:absolute;inset:0;background:linear-gradient(90deg,#120b27f6 0%,#231547d9 34%,#3924578c 52%,transparent 78%),linear-gradient(0deg,#08060dcc,transparent 40%,#08060d55)}
 .apple-content{position:relative;z-index:1;width:min(620px,48vw);margin-left:5.5vw;padding:64px 0}
 .apple-content h2{margin:0 0 12px;color:var(--cream);font:500 clamp(38px,4vw,58px)/1.05 var(--serif)}
-.apple-content h2 span{display:block;color:#ff6680}.apple-content>p:not(.kicker){max-width:430px;color:#ddd5e8;font-size:14px}.apple-player{margin:24px 0 14px;border:1px solid #ffffff30;border-radius:14px;overflow:hidden;background:#f7f7f7;box-shadow:0 24px 60px #0b06198f}.apple-player iframe{display:block;width:100%;height:450px;border:0}.apple-link{display:inline-block;padding-bottom:4px;border-bottom:1px solid #ff8095;font-size:12px}
+.apple-content h2 span{display:block;color:#ff6680}.apple-content>p:not(.kicker){max-width:430px;color:#ddd5e8;font-size:14px}.apple-player{margin:24px 0 14px;border:1px solid #ffffff30;border-radius:14px;overflow:hidden;background:#f7f7f7;box-shadow:0 24px 60px #0b06198f}.apple-player iframe{display:block;width:100%;height:450px;border:0}.apple-link{display:inline-flex;align-items:center;gap:7px;padding-bottom:4px;border-bottom:1px solid #ff8095;font-size:12px}
 .playlist-probe{position:fixed!important;left:-10px!important;top:-10px!important;width:1px!important;height:1px!important;clip-path:inset(50%);overflow:hidden;pointer-events:none}.playlist-loading .card-image{background:linear-gradient(110deg,#111a27 25%,#1b2a3c 42%,#111a27 58%);background-size:250% 100%;animation:playlist-loading 1.8s linear infinite}.playlist-loading h3,.playlist-loading p{color:#77808c}@keyframes playlist-loading{to{background-position:-180% 0}}
 @media(max-width:1100px){.hero-player{right:3vw;width:254px}.hero-copy{left:4vw}.site-header nav{gap:17px}.site-header nav .nav-contact{padding:10px 16px}}
 @media(max-width:800px){
@@ -72,6 +72,7 @@ html,body{overflow-x:clip}
 /* Geometric typography and responsive refinements */
 .hero h1,.about-copy h2,.spotify-intro h2,.band-copy h2,.reel-heading h2,.apple-content h2,.connect-intro h2,.section-top h2,.footer-brand{font-family:var(--sans);font-weight:700}
 .hero h1{line-height:.86;letter-spacing:-.065em}.script-line{font-family:var(--sans);font-weight:500;font-style:italic;letter-spacing:-.02em}.about-copy h2,.connect-intro h2{line-height:1.02;letter-spacing:-.045em}.spotify-intro h2,.apple-content h2{letter-spacing:-.04em}.reel-heading h2,.section-top h2{letter-spacing:-.025em}
+.external-arrow{width:14px;height:14px;display:inline-flex;align-items:center;justify-content:center;flex:0 0 14px;letter-spacing:0}.external-arrow svg{display:block;width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
 
 @media(max-width:800px){
   .hero{min-height:980px}.hero-art{height:530px;object-position:50% center}.hero-copy{top:342px}.hero-player{bottom:28px}
