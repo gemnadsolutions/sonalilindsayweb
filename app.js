@@ -20,7 +20,7 @@
       const link = document.createElement('a'); link.href = 'https://www.youtube.com/watch?v=' + encodeURIComponent(videoId) + '&list=' + encodeURIComponent(item.playlist); link.target = '_blank'; link.rel = 'noopener'; link.setAttribute('aria-label', item.label + ' ' + (index + 1) + ' on YouTube');
       const image = document.createElement('div'); image.className = 'card-image';
       const img = document.createElement('img'); img.src = 'https://i.ytimg.com/vi/' + encodeURIComponent(videoId) + '/hqdefault.jpg'; img.alt = ''; img.width = 480; img.height = 360; img.loading = 'lazy';
-      const play = document.createElement('span'); play.className = 'play-badge'; play.textContent = '▶'; play.setAttribute('aria-hidden', 'true');
+      const play = document.createElement('span'); play.className = 'play-badge'; play.setAttribute('aria-hidden', 'true');
       const title = document.createElement('h3'); title.textContent = item.label + ' ' + String(index + 1).padStart(2, '0');
       const meta = document.createElement('p'); meta.textContent = 'Sonali Lindsay · Watch on YouTube';
       image.append(img, play); link.append(image, title, meta); article.append(link); item.container.append(article);
@@ -65,8 +65,8 @@
   function clock(seconds) { seconds = Number.isFinite(seconds) ? Math.max(0, Math.floor(seconds)) : 0; return Math.floor(seconds / 60) + ':' + String(seconds % 60).padStart(2,'0'); }
   async function play() { if (pending || document.hidden) return; pending = true; try { await audio.play(); started = true; status.textContent = 'Track ' + (track + 1) + ' is playing.'; } catch (error) { if (error.name === 'NotAllowedError') status.textContent = 'Music starts after your first interaction.'; } finally { pending = false; } }
   function load(index) { track = index % 5; audio.src = 'assets/track-' + (track + 1) + '.mp3'; audio.load(); $('#track-title').textContent = 'Track ' + (track + 1); $('#track-count').textContent = String(track + 1).padStart(2,'0') + ' / 05'; $('#track-art').src = 'assets/' + covers[track] + '.webp'; document.querySelectorAll('.track-list li').forEach((li,i) => li.classList.toggle('active', i === track)); progress.firstElementChild.style.width = '0%'; play(); }
-  audio.addEventListener('playing', () => { document.body.classList.add('is-playing'); playPause.textContent = 'Ⅱ'; playPause.setAttribute('aria-label', 'Pause music preview'); playPause.setAttribute('aria-pressed', 'true'); });
-  audio.addEventListener('pause', () => { document.body.classList.remove('is-playing'); playPause.textContent = '▶'; playPause.setAttribute('aria-label', 'Play music preview'); playPause.setAttribute('aria-pressed', 'false'); });
+  audio.addEventListener('playing', () => { document.body.classList.add('is-playing'); playPause.setAttribute('aria-label', 'Pause music preview'); playPause.setAttribute('aria-pressed', 'true'); });
+  audio.addEventListener('pause', () => { document.body.classList.remove('is-playing'); playPause.setAttribute('aria-label', 'Play music preview'); playPause.setAttribute('aria-pressed', 'false'); });
   audio.addEventListener('ended', () => load(track + 1));
   audio.addEventListener('loadedmetadata', () => $('#duration').textContent = clock(audio.duration));
   audio.addEventListener('timeupdate', () => { const pct = audio.duration ? audio.currentTime / audio.duration * 100 : 0; progress.firstElementChild.style.width = pct + '%'; progress.setAttribute('aria-valuenow', String(Math.round(pct))); $('#elapsed').textContent = clock(audio.currentTime); });
