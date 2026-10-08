@@ -3,7 +3,7 @@ ASSET SOURCES
 
 Brand logo, hero portrait, About portrait and five MP3 previews: supplied by the user in the referenced ChatGPT conversation.
 Logo is cropped to its existing transparent bounds; portraits compressed to WebP.
-About image: user-supplied cc.jpg. Band image: user-supplied CC2.png. Both optimized to WebP from 4032 × 1024 originals.
+About image: user-supplied cc.jpg. The earlier CC2.png band image remains bundled as `band.webp` for the audio preview artwork.
 Temporary audio artwork reuses the supplied portraits/concert photo.
 
 Archive source: https://sonalilindsay.com/latest-archives/
@@ -51,6 +51,12 @@ Amma (අම්මා) | Sonali Lindsay | Official Music Video | Mother's Day So
 
 assets/video-poster.jpg
 https://i.ytimg.com/vi/Cf3tMUxd68Q/hqdefault.jpg
+
+User-supplied assets added 9 October 2026:
+assets/hero-banner.jpg — Hero-banner.jpg
+assets/spotify-bg.jpg — bg.jpg
+assets/sonali-and-the-escape.jpg — sonali-and-the-scape.jpg
+assets/apple-music.jpg — Apple-music.jpg
 
 assets/video-1.jpg
 https://i.ytimg.com/vi/Cf3tMUxd68Q/hqdefault.jpg

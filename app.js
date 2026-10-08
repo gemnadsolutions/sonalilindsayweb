@@ -9,40 +9,71 @@
   const observer = new IntersectionObserver(entries => entries.forEach(entry => { if (!entry.isIntersecting) return; nav.querySelectorAll('a').forEach(a => a.toggleAttribute('aria-current', a.hash === '#' + entry.target.id)); }), { rootMargin: '-15% 0px -65%' });
   ['home','about','music','videos','gallery','contact'].forEach(id => observer.observe(document.getElementById(id)));
 
-  const releases = config.releases || [];
-  const videos = [
-    {id:'Cf3tMUxd68Q',title:'Yamaha Pro Studio Session with Sonali Lindsay'},
-    {id:'R7IOmjmQs5w',title:'Channel EYE — Rupavahini Television'},
-    {id:'SMR6ZRfl8DI',title:'Sonali — YesFM Interview'},
-    {id:'jPkbj67eSZM',title:'Rise & Shine'}
+  const livePlaylists = [
+    { container: $('#release-grid'), playlist: config.featuredPlaylist, label: 'Featured release', prefix: 'release' },
+    { container: $('#video-grid'), playlist: config.videosPlaylist, label: 'In the Spotlight', prefix: 'spotlight' }
   ];
-  function buildCards(container, items, prefix, playlist) {
-    items.slice(0,4).forEach((item, index) => {
+  function renderLiveCards(item, videoIds) {
+    item.container.replaceChildren();
+    videoIds.slice(0, 4).forEach((videoId, index) => {
       const article = document.createElement('article'); article.className = 'media-card';
-      const link = document.createElement('a'); link.href = 'https://www.youtube.com/watch?v=' + encodeURIComponent(item.id) + '&list=' + playlist; link.target = '_blank'; link.rel = 'noopener'; link.setAttribute('aria-label','Watch ' + item.title + ' on YouTube');
+      const link = document.createElement('a'); link.href = 'https://www.youtube.com/watch?v=' + encodeURIComponent(videoId) + '&list=' + encodeURIComponent(item.playlist); link.target = '_blank'; link.rel = 'noopener'; link.setAttribute('aria-label', item.label + ' ' + (index + 1) + ' on YouTube');
       const image = document.createElement('div'); image.className = 'card-image';
-      const img = document.createElement('img'); img.src = 'assets/' + prefix + '-' + (index + 1) + '.jpg'; img.alt = ''; img.width = 480; img.height = 360; img.loading = 'lazy';
-      const play = document.createElement('span'); play.className = 'play-badge'; play.textContent = '▶'; play.setAttribute('aria-hidden','true');
-      image.append(img, play); const title = document.createElement('h3'); title.textContent = item.title; const meta = document.createElement('p'); meta.textContent = 'Sonali Lindsay · Watch on YouTube'; link.append(image,title,meta); article.append(link); container.append(article);
+      const img = document.createElement('img'); img.src = 'https://i.ytimg.com/vi/' + encodeURIComponent(videoId) + '/hqdefault.jpg'; img.alt = ''; img.width = 480; img.height = 360; img.loading = 'lazy';
+      const play = document.createElement('span'); play.className = 'play-badge'; play.textContent = '▶'; play.setAttribute('aria-hidden', 'true');
+      const title = document.createElement('h3'); title.textContent = item.label + ' ' + String(index + 1).padStart(2, '0');
+      const meta = document.createElement('p'); meta.textContent = 'Sonali Lindsay · Watch on YouTube';
+      image.append(img, play); link.append(image, title, meta); article.append(link); item.container.append(article);
     });
   }
-  buildCards($('#release-grid'), releases, 'release', config.featuredPlaylist);
-  buildCards($('#video-grid'), videos, 'video', config.videosPlaylist);
+  livePlaylists.forEach(item => {
+    for (let index = 0; index < 4; index += 1) {
+      const card = document.createElement('article'); card.className = 'media-card playlist-loading';
+      card.innerHTML = '<div class="card-image" aria-hidden="true"></div><h3>Loading from YouTube…</h3><p>Live playlist</p>';
+      item.container.append(card);
+    }
+    const probe = document.createElement('div'); probe.id = item.prefix + '-playlist-probe'; probe.className = 'playlist-probe'; probe.setAttribute('aria-hidden', 'true'); document.body.append(probe);
+  });
+  window.onYouTubeIframeAPIReady = () => {
+    livePlaylists.forEach(item => {
+      new window.YT.Player(item.prefix + '-playlist-probe', {
+        width: '1', height: '1',
+        playerVars: { listType: 'playlist', list: item.playlist, rel: 0, playsinline: 1 },
+        events: {
+          onReady: event => {
+            let attempts = 0;
+            const readPlaylist = () => {
+              const videoIds = event.target.getPlaylist() || [];
+              if (videoIds.length) { renderLiveCards(item, videoIds); return; }
+              if (attempts++ === 0) event.target.cuePlaylist({ listType: 'playlist', list: item.playlist, index: 0 });
+              if (attempts < 8) window.setTimeout(readPlaylist, 500);
+            };
+            readPlaylist();
+          }
+        }
+      });
+    });
+  };
+  const youtubeAPI = document.createElement('script');
+  youtubeAPI.src = 'https://www.youtube.com/iframe_api';
+  youtubeAPI.async = true;
+  document.head.append(youtubeAPI);
 
-  const audio = $('#preview-audio'), mute = $('#mute'), status = $('#audio-status'), progress = $('.progress');
+  const audio = $('#preview-audio'), mute = $('#mute'), playPause = $('#play-pause'), status = $('#audio-status'), progress = $('.progress');
   const covers = ['hero','about','band','hero','about']; let track = 0, started = false, pending = false, muted = false;
   audio.volume = .35;
   function clock(seconds) { seconds = Number.isFinite(seconds) ? Math.max(0, Math.floor(seconds)) : 0; return Math.floor(seconds / 60) + ':' + String(seconds % 60).padStart(2,'0'); }
   async function play() { if (pending || document.hidden) return; pending = true; try { await audio.play(); started = true; status.textContent = 'Track ' + (track + 1) + ' is playing.'; } catch (error) { if (error.name === 'NotAllowedError') status.textContent = 'Music starts after your first interaction.'; } finally { pending = false; } }
   function load(index) { track = index % 5; audio.src = 'assets/track-' + (track + 1) + '.mp3'; audio.load(); $('#track-title').textContent = 'Track ' + (track + 1); $('#track-count').textContent = String(track + 1).padStart(2,'0') + ' / 05'; $('#track-art').src = 'assets/' + covers[track] + '.webp'; document.querySelectorAll('.track-list li').forEach((li,i) => li.classList.toggle('active', i === track)); progress.firstElementChild.style.width = '0%'; play(); }
-  audio.addEventListener('playing', () => document.body.classList.add('is-playing'));
-  audio.addEventListener('pause', () => document.body.classList.remove('is-playing'));
+  audio.addEventListener('playing', () => { document.body.classList.add('is-playing'); playPause.textContent = 'Ⅱ'; playPause.setAttribute('aria-label', 'Pause music preview'); playPause.setAttribute('aria-pressed', 'true'); });
+  audio.addEventListener('pause', () => { document.body.classList.remove('is-playing'); playPause.textContent = '▶'; playPause.setAttribute('aria-label', 'Play music preview'); playPause.setAttribute('aria-pressed', 'false'); });
   audio.addEventListener('ended', () => load(track + 1));
   audio.addEventListener('loadedmetadata', () => $('#duration').textContent = clock(audio.duration));
   audio.addEventListener('timeupdate', () => { const pct = audio.duration ? audio.currentTime / audio.duration * 100 : 0; progress.firstElementChild.style.width = pct + '%'; progress.setAttribute('aria-valuenow', String(Math.round(pct))); $('#elapsed').textContent = clock(audio.currentTime); });
   audio.addEventListener('error', () => { status.textContent = 'This preview is unavailable. Listen on Spotify instead.'; });
-  function firstInteraction(e) { if (started || e.target.closest('input,textarea,select,#mute,iframe')) return; if (e.type === 'keydown' && ['Shift','Control','Alt','Meta','Escape'].includes(e.key)) return; play(); }
+  function firstInteraction(e) { if (started || e.target.closest('input,textarea,select,#mute,#play-pause,iframe')) return; if (e.type === 'keydown' && ['Shift','Control','Alt','Meta','Escape'].includes(e.key)) return; play(); }
   document.addEventListener('pointerdown', firstInteraction); document.addEventListener('keydown', firstInteraction);
+  playPause.addEventListener('click', () => { if (audio.paused) play(); else audio.pause(); });
   mute.addEventListener('click', () => { muted = !muted; audio.muted = muted; mute.textContent = muted ? 'Sound off' : 'Sound on'; mute.setAttribute('aria-pressed',String(muted)); if (!started) play(); });
   document.addEventListener('visibilitychange', () => { if (document.hidden) audio.pause(); }); play();
 

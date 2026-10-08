@@ -1,19 +1,16 @@
 # Verification
 
-Checked locally in installed Chrome on 28 September 2026.
+Checked locally in Chrome on 9 October 2026.
 
-- The complete natural audio sequence was observed: Track 1 → Track 2 → Track 3 → Track 4 → Track 5 → Track 1.
-- First-interaction audio playback and mute worked. The source clips are approximately 8.81 seconds each and remain untrimmed.
-- Mobile menu opening, navigation and closing worked.
-- Gallery pause and reduced-motion behavior worked. All local images loaded.
-- Empty and whitespace-only required fields were rejected. Valid input produced a downloadable enquiry draft and an explicit not-sent message.
-- Both four-card media strips linked to the requested YouTube playlists without placing a large video player in the page.
-- The band subpage loaded with the intended title and return link.
-- Local HTML references resolved, IDs were unique, and JavaScript syntax and browser execution produced no errors.
-- Layout was checked at 320, 390, 768 and 1440 pixels. An aspect-ratio/minimum-height overflow was found and corrected.
+- Desktop and mobile layouts were rendered at 1440 × 1000 and 390 × 844 without horizontal overflow.
+- The new hero image is centered at both widths, and the compact glass music player remains inside the mobile frame with reduced mobile spacing.
+- The play/pause control was exercised in the browser: play started the preview and pause stopped it with the correct accessible label.
+- Contact is styled as a navigation button and still links to the booking form.
+- Featured Releases returned the current first four video IDs from its configured YouTube playlist.
+- In the Spotlight returned the current first four video IDs from its configured YouTube playlist.
+- The Apple Music player loads “Saregama - Single” and the supplied Apple Music artwork is present. Its mobile heading and copy are centered above the player.
+- The Poppins typography, Spotify background, taller refreshed band image, straight film reel and updated footer are present.
+- The responsive band page contains five temporary gallery images and no horizontal overflow.
+- Local HTML references resolve, IDs are unique, JavaScript syntax passes, and the browser reported no page errors.
 
-External Spotify playback was not fully verifiable because its player loaded inconsistently in this environment. YouTube uses verified local thumbnails and direct official playlist links.
-
-No email endpoint was supplied, so real delivery was neither enabled nor tested. No deployment was performed. The optional experimental WebMCP interface was unavailable for end-to-end validation.
-
-The newly supplied cc.jpg and CC2.png replace the About and band images respectively.
+External Spotify and Apple Music playback depends on their services, browser settings and an internet connection. The booking form still has no delivery endpoint, so it prepares a local enquiry draft rather than sending email. No deployment was requested or performed.

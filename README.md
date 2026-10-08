@@ -22,8 +22,7 @@ The endpoint must provide server-side validation, rate limiting/abuse controls a
 - Autoplay is attempted at 35% volume. If blocked, a first eligible tap or keypress retries it. There is no dedicated hero play button. A labelled mute/unmute control remains available.
 - Previews pause when the tab is hidden and continue through the five clips in order while the page is active.
 - The temporary cover artwork reuses supplied photos. Replace the `covers` array in `app.js` and the corresponding images when final artwork is ready.
-- Featured Releases is a compact four-card strip using the verified 28 September 2026 playlist snapshot in `config.js`. Each card opens its official YouTube video within the supplied playlist.
-- The separate In the Spotlight strip uses the first four verified items from the supplied Videos playlist. It links to YouTube instead of embedding a large playlist player, matching the approved wireframe.
+- Featured Releases and In the Spotlight read the current playlist order through YouTube’s official player API on each page load. Their first four thumbnails and links therefore follow the configured playlists rather than bundled snapshots.
 - Spotify uses the official artist iframe only, with no API or credentials.
 - The Spotify embed requires an internet connection and can vary by browser, region and privacy settings. YouTube cards always retain direct official links. Spotify and Google Fonts contact their respective services.
 
@@ -31,7 +30,9 @@ The endpoint must provide server-side validation, rate limiting/abuse controls a
 
 The exact supplied short bio is in `index.html`. The final supplied logo, hero image, About image and all five audio files are included. Eight selected archive photos are bundled locally; source URLs are listed in `ASSET-SOURCES.txt`.
 
-The supplied `cc.jpg` is used for About Sonali and `CC2.png` for Sonali & The Escape (including the band subpage), optimized to WebP. Spotify pairs the Sonali logo and introductory copy on the left with the official player on the right. Contact social links use accessible, labelled icons.
+The supplied `cc.jpg` remains in About Sonali. The refreshed hero, Spotify background, Sonali & The Escape artwork and Apple Music artwork are included as local assets. Spotify pairs the Sonali logo and introductory copy with the official player. Apple Music uses the official player for the latest release, “Saregama - Single.” The band subpage includes a responsive temporary archive gallery ready for the final band photographs. Contact social links use accessible, labelled icons.
+
+Typography uses Poppins throughout to match the supplied bold geometric reference. The hero preview player includes a compact play/pause control.
 
 The archive filmstrip continuously moves right to left. Visitors can pause it. Hover also pauses it. Reduced-motion settings disable animation and make the strip horizontally scrollable.
 
@@ -47,8 +48,8 @@ The site optionally exposes a section-navigation tool in browsers implementing `
 - `band.html` — requested band placeholder subpage
 - `styles.css` — responsive dark cinematic design
 - `app.js` — interactions, audio, playlists, form validation
-- `config.js` — email endpoint, playlist identifiers and fallback releases
+- `config.js` — email endpoint and playlist identifiers
 - `assets/` — local portraits, logo, gallery, thumbnails and five MP3s
 - `ASSET-SOURCES.txt` — asset provenance
 
-Footer: © 2026 Sonali Lindsay · Developed by Gemnad Solutions (Pvt) Ltd
+Footer: © 2026 Sonali Lindsay
